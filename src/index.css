@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html *
+{
+  border:0px solid red; /* #f7f7f7 */
+}
+
+a {
+  color: red;
+  text-decoration: none;
+}
+
+/* ------------------------------- <Navbar /> ------------------------------- */
+
+.navbar {
+  background: #3B3178; /* purple */
+  height: 70px;
+  font-size: 16px;
+  /* top right bottom left */
+  padding: 20px 0px 20px 0px;
+  width: 100%;
+  color: white;
+}
+
+.navbar div {
+  text-align: center;
+  width: 100%;
+}
+
+.navbar div:first-child {
+  font-weight: bold;
+}
+/* top right bottom left */
+.pipe {
+  margin: 0px 10px 0px 10px; 
+}
+
+@media (min-width: 576px) {
+  .navbar {
+    display: flex;
+    position: fixed;
+    justify-content: space-around;
+  }
+
+  .navbar div {
+    width: 33.333%;
+  }
+}
+
+/* ------------------------------- <Character /> ------------------------------- */
+
+.card {
+  border: 3px solid silver;
+  width: 175px;
+  height: 175px;
+  margin: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  border-radius: 0;
+}
+
+.card-height {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* ------------------------------- <Container /> ------------------------------- */
+
+.container {
+  margin:10px auto 10px auto;
+}
+
+@media (min-width: 1078px) {
+  .container {
+    padding: 0px 75px 0px 75px;
+    width: 1100px;
+  }
+}
+
+.container {
+  transform: translate3d(0, 0, 0);
+}
+
+.shake {
+  animation: shaker 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shaker {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* ------------------------------- <Footer /> ------------------------------- */
+
+.footer {
+  background-color: #3B3178;
+  color: white;
+  font-size: 14px;
+  height: 50px;
+  padding: 10px 0px 10px 0px;
+}
+
+/* ------------------------------- <Banner /> ------------------------------- */
+
+.banner {
+  background-color: gray;
+  height: 100px;
+  color: white;
+  font-size: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top:70px !important;
+}
+
+@media (max-width: 576px) {
+  .banner {
+    height: auto !important;
+    padding-top:28px !important;
+  }
+}
+
+
