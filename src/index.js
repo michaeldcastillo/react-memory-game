@@ -5,24 +5,6 @@ import ReactDOM from "react-dom";
 import './index.css';
 
 //------------------------------------------------ IMAGES [array] -------------------------------------------------------------
-/*
-//const beth = "https://vignette.wikia.nocookie.net/p__/images/c/cb/SpongeBob_SquarePants_Render.png/revision/latest?cb=20190120193322&path-prefix=protagonist";
-import beth from "./images/beth.png";
-import birdperson from "./images/birdperson.png";
-import evilmorty from "./images/evilmorty.png";
-import gianthead from "./images/gianthead.png";
-import goldenford from "./images/goldenford.png";
-import jerry from "./images/jerry.png";
-import jessica from "./images/jessica.png";
-import meeseeks from "./images/meeseeks.png";
-import morty from "./images/morty.png";
-import mr from "./images/mr.png";
-import rick from "./images/rick.png";
-import summer from "./images/summer.png";
-
-const images = [beth,birdperson,evilmorty,gianthead,goldenford,jerry,jessica,meeseeks,morty,mr,rick,summer];
-*/
-//------------------------------------------------ IMAGES [array] -------------------------------------------------------------
 
 import bs01 from "./images/bs-200x200-01.jpg";
 import bs02 from "./images/bs-200x200-02.jpg";
@@ -43,10 +25,10 @@ const images = [bs01,bs02,bs03,bs04,bs05,bs06,bs07,bs08,bs09,bs10,bs11,bs12];
 // <h3 style={{border:"1px solid red"}} >Functional Component</h3> {/* this is an example of inline CSS  declared on the element */}
 
 const Navbar = props => (
-  <div className="navbar ">
-    <div>Memory Game</div>
-    <div>{props.navMessage}</div>
-    <div>
+  <div className="navbar">
+    <div id="memorygame">Memory Game</div>
+    <div id="message" className={props.messageColor}><span style={{fontWeight:"bold"}}>{props.navMessage}</span></div>
+    <div id="score">
       Score: <span style={{fontWeight:"bold"}}>{props.score}</span> <span className="pipe">|</span> Top Score: <span style={{fontWeight:"bold"}}>{props.topScore}</span>
     </div>
   </div>
@@ -84,9 +66,14 @@ const Banner = () => (
 
 class Game extends Component {
 
-  state = { score: 0, topScore: 0, navMessage: 'Click an image to begin!', allImages: this.shuffleArray(), wasClicked: [], shake: false };
+  state = { score: 0, topScore: 0, messageColor: '', navMessage: 'Click an image to begin!', allImages: this.initArray(), wasClicked: [], shake: false };
 
   clickEvent = this.checkClicked.bind(this);
+
+  initArray() {
+    const newArr = images.slice();
+    return newArr;
+  }
 
   shuffleArray() {
     const newArr = images.slice();
@@ -119,10 +106,15 @@ class Game extends Component {
 
       if (this.state.wasClicked.includes(element)) {
         let score = 0;
-        return this.setState({ score: score, topScore: topScore, navMessage: 'Incorrect guess!', allImages: shuffled, wasClicked: [], shake: true });
+        return this.setState({ score: score, topScore: topScore, messageColor: 'incorrect', navMessage: 'Incorrect guess!', allImages: shuffled, wasClicked: [], shake: true });
       }
 
-      this.setState({ score: score, topScore: topScore, navMessage: 'You Guessed Correctly!', allImages: shuffled, wasClicked: prevState, shake: false });
+      this.setState({ score: score, topScore: topScore, messageColor: 'correct', navMessage: 'You Guessed Correctly!', allImages: shuffled, wasClicked: prevState, shake: false });
+
+      //winning condition
+      if(score === 12) {
+        this.setState({ score: 0, topScore: topScore, messageColor: '', navMessage: 'YOU WON!', allImages: this.initArray(), wasClicked: [], shake: false });
+      }
 
   }
 
@@ -131,9 +123,9 @@ class Game extends Component {
     const state = this.state;
     
     return (
-      <div>
+      <div id="nest">
 
-        <Navbar score={state.score} topScore={state.topScore} navMessage={state.navMessage} />
+        <Navbar score={state.score} topScore={state.topScore} messageColor={state.messageColor} navMessage={state.navMessage} />
 
         <Banner />
 
